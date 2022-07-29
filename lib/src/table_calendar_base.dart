@@ -8,6 +8,7 @@ import 'shared/utils.dart';
 import 'widgets/calendar_core.dart';
 
 class TableCalendarBase extends StatefulWidget {
+  final PageController pageController;
   final DateTime firstDay;
   final DateTime lastDay;
   final DateTime focusedDay;
@@ -41,6 +42,7 @@ class TableCalendarBase extends StatefulWidget {
     required this.firstDay,
     required this.lastDay,
     required this.focusedDay,
+    required this.pageController,
     this.calendarFormat = CalendarFormat.month,
     this.dowBuilder,
     required this.dayBuilder,
@@ -99,7 +101,7 @@ class _TableCalendarBaseState extends State<TableCalendarBase> {
     final initialPage = _calculateFocusedPage(
         widget.calendarFormat, widget.firstDay, _focusedDay);
 
-    _pageController = PageController(initialPage: initialPage);
+    _pageController = widget.pageController;
     widget.onCalendarCreated?.call(_pageController);
 
     _previousIndex = initialPage;

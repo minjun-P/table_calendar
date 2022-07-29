@@ -204,9 +204,12 @@ class TableCalendar<T> extends StatefulWidget {
   /// Called when the calendar is created. Exposes its PageController.
   final void Function(PageController pageController)? onCalendarCreated;
 
+  PageController pageController;
+
   /// Creates a `TableCalendar` widget.
   TableCalendar({
     Key? key,
+    required this.pageController,
     required DateTime focusedDay,
     required DateTime firstDay,
     required DateTime lastDay,
@@ -479,6 +482,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
         Flexible(
           flex: widget.shouldFillViewport ? 1 : 0,
           child: TableCalendarBase(
+            pageController: widget.pageController,
             onCalendarCreated: (pageController) {
               _pageController = pageController;
               widget.onCalendarCreated?.call(pageController);
